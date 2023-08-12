@@ -18,6 +18,11 @@ CAccelerator AccelerationEngine;
 /// </summary>
 CShaAcceleratorDriver AcceleratorMediator(true);
 
+/// <summary>
+/// Mocks a similar API to Wolf's wc_Sha* functions. 
+/// </summary>
+#pragma region
+
 void Init(CShaContext& rContext)
 {
   rContext.Accelerator.Init();
@@ -65,7 +70,11 @@ void Free(CShaContext& rContext)
 {
   AcceleratorMediator.AbandonCalculation(rContext);
 }
+#pragma endregion
 
+/// <summary>
+/// Few test cases. 
+/// </summary>
 int main()
 {
   cout << "Acceleration engine mediation tester\n";
