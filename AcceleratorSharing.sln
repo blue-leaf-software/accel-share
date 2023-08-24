@@ -5,22 +5,42 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcceleratorSharing", "AcceleratorSharing\AcceleratorSharing.vcxproj", "{C901F25A-6CE9-437D-991D-0D32C1C59ECA}"
 EndProject
+Project("{803FD0C6-D64E-4E16-9DC3-1DAEC859A3D2}") = "ShaTest", "ShaTest\ShaTest.vgdbproj", "{335899C2-FD59-41F8-B66D-F6CFC3E724E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|VisualGDB = Debug|VisualGDB
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|VisualGDB = Release|VisualGDB
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Debug|VisualGDB.ActiveCfg = Debug|x64
+		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Debug|VisualGDB.Build.0 = Debug|x64
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Debug|x64.ActiveCfg = Debug|x64
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Debug|x64.Build.0 = Debug|x64
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Debug|x86.ActiveCfg = Debug|Win32
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Debug|x86.Build.0 = Debug|Win32
+		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Release|VisualGDB.ActiveCfg = Release|x64
+		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Release|VisualGDB.Build.0 = Release|x64
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Release|x64.ActiveCfg = Release|x64
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Release|x64.Build.0 = Release|x64
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Release|x86.ActiveCfg = Release|Win32
 		{C901F25A-6CE9-437D-991D-0D32C1C59ECA}.Release|x86.Build.0 = Release|Win32
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Debug|x64.ActiveCfg = Debug|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Debug|x64.Build.0 = Debug|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Debug|x86.ActiveCfg = Debug|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Debug|x86.Build.0 = Debug|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Release|VisualGDB.Build.0 = Release|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Release|x64.ActiveCfg = Release|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Release|x64.Build.0 = Release|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Release|x86.ActiveCfg = Release|VisualGDB
+		{335899C2-FD59-41F8-B66D-F6CFC3E724E1}.Release|x86.Build.0 = Release|VisualGDB
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
