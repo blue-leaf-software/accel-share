@@ -73,20 +73,54 @@ extern "C" void app_main(void)
     cout << "Wolf initialization failed\n";
     abort();
   }
-  
 
   string_view svData("To be or not to be, that is the question. Whether it is better to suffer the slings and arrows of outrageous fortune or, by opposing, end them");
   
-  wc_Sha Sha1_1;
-  uint8_t abyHashResult[WC_SHA_DIGEST_SIZE];
+  cout << "Software:\n";
+  wc_Sha Sha1_Software;
+  uint8_t abySoftwareHash[WC_SHA_DIGEST_SIZE];
+
+  wc_InitSha(&Sha1_Software);
+  wc_ShaUpdate(&Sha1_Software, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
+  wc_ShaUpdate(&Sha1_Software, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
+  wc_ShaFinal(&Sha1_Software, abySoftwareHash);
   
-  wc_InitSha(&Sha1_1);
-  wc_ShaUpdate(&Sha1_1, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
-  wc_ShaUpdate(&Sha1_1, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
-  wc_ShaFinal(&Sha1_1, abyHashResult);
+
+  bool bEnableHardwareAcceleration = true; 
+  if (bEnableHardwareAcceleration)
+  {
+    esp_sha_enable_hw_accelerator();
+  }
+
+  cout << "\n\nHardware:\n";
+  wc_Sha Sha1_Hardware;
+  uint8_t abyHardwareHash[WC_SHA_DIGEST_SIZE];
   
-  DumpDigest(abyHashResult, sizeof(abyHashResult));
+  wc_InitSha(&Sha1_Hardware);
+  wc_ShaUpdate(&Sha1_Hardware, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
+  wc_ShaUpdate(&Sha1_Hardware, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
+  wc_ShaFinal(&Sha1_Hardware, abyHardwareHash);
   
+  cout << "Software result: ";
+  DumpDigest(abySoftwareHash, sizeof(abySoftwareHash));
+
+  cout << "Hardware result: ";
+  DumpDigest(abyHardwareHash, sizeof(abyHardwareHash));
+  
+  if (0 == memcmp(abySoftwareHash, abyHardwareHash, sizeof(abyHardwareHash)))
+  {
+    cout << "Equal!\n";
+  }
+  else
+  {
+    cout << "Different :-(\n";
+  }
+  
+  if (bEnableHardwareAcceleration)
+  {
+    esp_sha_disable_hw_accelerator();
+  }
+
   cout << "Done.\n";
   while (true)
   {

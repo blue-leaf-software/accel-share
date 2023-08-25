@@ -157,13 +157,43 @@
       <EnablePrettyPrinters>false</EnablePrettyPrinters>
     </AdditionalGDBSettings>
     <DebugMethod>
-      <ID>gdbsim</ID>
-      <Configuration>
-        <Entries />
+      <ID>openocd</ID>
+      <InterfaceID>esp_usb_jtag</InterfaceID>
+      <InterfaceSerialNumber>7C:DF:A1:E6:4B:34</InterfaceSerialNumber>
+      <Configuration xsi:type="com.visualgdb.edp.openocd.settings.esp32">
+        <CommandLine>-f interface/esp_usb_jtag.cfg -c "adapter_khz 3000" -f target/esp32s3.cfg</CommandLine>
+        <ExtraParameters>
+          <Frequency xsi:nil="true" />
+          <BoostedFrequency xsi:nil="true" />
+          <ConnectUnderReset>false</ConnectUnderReset>
+        </ExtraParameters>
+        <LoadProgressGUIThreshold>131072</LoadProgressGUIThreshold>
+        <ProgramMode>Auto</ProgramMode>
+        <StartupCommands>
+          <string>set remotetimeout 60</string>
+          <string>target remote :$$SYS:GDB_PORT$$</string>
+          <string>mon gdb_breakpoint_override hard</string>
+          <string>mon reset halt</string>
+          <string>load</string>
+        </StartupCommands>
+        <ProgramFLASHUsingExternalTool>false</ProgramFLASHUsingExternalTool>
+        <PreferredGDBPort>0</PreferredGDBPort>
+        <PreferredTelnetPort>0</PreferredTelnetPort>
+        <AlwaysPassSerialNumber>false</AlwaysPassSerialNumber>
+        <SelectedCoreIndex xsi:nil="true" />
+        <LiveMemoryTimeout>5000</LiveMemoryTimeout>
+        <SuggestionLogicRevision>1</SuggestionLogicRevision>
+        <CheckFLASHSize>true</CheckFLASHSize>
+        <FLASHSettings>
+          <Size>size2MB</Size>
+          <Frequency>freq40M</Frequency>
+          <Mode>DIO</Mode>
+        </FLASHSettings>
+        <PatchBootloader>true</PatchBootloader>
       </Configuration>
     </DebugMethod>
     <AutoDetectRTOS>true</AutoDetectRTOS>
-    <SemihostingSupport>Auto</SemihostingSupport>
+    <SemihostingSupport>Disabled</SemihostingSupport>
     <SemihostingPollingDelay>0</SemihostingPollingDelay>
     <StepIntoEntryPoint>false</StepIntoEntryPoint>
     <ReloadFirmwareOnReset>false</ReloadFirmwareOnReset>
