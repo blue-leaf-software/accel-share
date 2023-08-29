@@ -95,6 +95,7 @@ void CompareSoftwareHardwareHash()
   wc_ShaUpdate(&Sha1_Software, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
   wc_ShaUpdate(&Sha1_Software, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
   wc_ShaFinal(&Sha1_Software, abySoftwareHash);
+  wc_ShaFree(&Sha1_Software);
 
 
   esp_sha_enable_hw_accelerator();
@@ -107,6 +108,7 @@ void CompareSoftwareHardwareHash()
   wc_ShaUpdate(&Sha1_Hardware, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
   wc_ShaUpdate(&Sha1_Hardware, reinterpret_cast<const unsigned char*>(svData.data()), svData.length());
   wc_ShaFinal(&Sha1_Hardware, abyHardwareHash);
+  wc_ShaFree(&Sha1_Hardware);
 
   cout << "Software result: ";
   DumpDigest(abySoftwareHash, sizeof(abySoftwareHash));
@@ -157,7 +159,6 @@ void InterleavedHashes(vector<string_view>& vData, vector<wc_Sha>& ShaContexts, 
     CDigestResult Digest;
     wc_ShaFinal(&ShaContexts[iSha], Digest.Digest);
     rResult.push_back(Digest);
-    Digest.Dump();
   }
 }
 
@@ -183,7 +184,6 @@ void SequentialHashes(vector<string_view>& vData, vector<wc_Sha>& ShaContexts, v
     CDigestResult Digest;
     wc_ShaFinal(&ShaContexts[iSha], Digest.Digest);
     rResult.push_back(Digest);
-    Digest.Dump();
   }
 }
 
@@ -202,7 +202,8 @@ void CompareInterleavedHashes()
   vector<CDigestResult> Result_Hardware;
 
   bool bInterleave = true; 
-  
+
+  cout << "**** Software calculation of interleaved hashs\n";
   if (bInterleave)
   {
     InterleavedHashes(vData, Sha_Software, Result_Software);
@@ -213,7 +214,8 @@ void CompareInterleavedHashes()
   }
 
   esp_sha_enable_hw_accelerator();
-  
+
+  cout << "**** Hardware calculation of interleaved hashs\n";
   if (bInterleave)
   {
     InterleavedHashes(vData, Sha_Hardware, Result_Hardware);
@@ -258,7 +260,7 @@ extern "C" void app_main(void)
     abort();
   }
 
-  //CompareSoftwareHardwareHash();
+  CompareSoftwareHardwareHash();
   CompareInterleavedHashes();
   cout << "Done.\n";
   while (true)
